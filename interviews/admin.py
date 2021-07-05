@@ -1,12 +1,19 @@
 from django.contrib import admin
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 from interviews.forms import (
     QuestionForm,
 )
 from interviews.models import (
+    Answer,
     Interview,
     Question,
 )
+
+
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    search_fields = 'text', 'question__text', 'interview__title'
 
 
 class QuestionInline(admin.TabularInline):

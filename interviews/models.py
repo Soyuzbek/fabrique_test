@@ -24,7 +24,7 @@ class Question(models.Model):
     text = models.CharField('text', max_length=255)
     kind = models.CharField('kind', max_length=45, choices=Kind.choices, default=Kind.TEXT)
     options = ArrayField(models.CharField(max_length=255), null=True, blank=True)
-    interview = models.ForeignKey(Interview, models.CASCADE)
+    interview = models.ForeignKey(Interview, models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name = 'question'
@@ -32,3 +32,20 @@ class Question(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Answer(models.Model):
+    text = models.CharField(max_length=500, null=True, blank=True)
+    multiple = ArrayField(models.CharField(max_length=255), null=True, blank=True)
+    interview = models.ForeignKey(Interview, models.SET_NULL, null=True, blank=True)
+    question = models.ForeignKey(Question, models.CASCADE)
+    user = models.ForeignKey('accounts.User', models.SET_NULL, null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'answer'
+        verbose_name_plural = 'answers'
+
+    def __str__(self):
+        if self.text:
+            return self.text
+        return super().__str__()
