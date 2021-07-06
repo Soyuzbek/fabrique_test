@@ -35,9 +35,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    text = models.CharField(max_length=500, null=True, blank=True)
-    multiple = ArrayField(models.CharField(max_length=255), null=True, blank=True)
-    interview = models.ForeignKey(Interview, models.SET_NULL, null=True, blank=True)
+    answer = ArrayField(models.CharField())
     question = models.ForeignKey(Question, models.CASCADE)
     user = models.ForeignKey('accounts.User', models.SET_NULL, null=True, blank=True)
 
@@ -46,6 +44,6 @@ class Answer(models.Model):
         verbose_name_plural = 'answers'
 
     def __str__(self):
-        if self.text:
-            return self.text
+        if isinstance(self.question.kind == Kind.TEXT):
+            return self.answer[0]
         return super().__str__()

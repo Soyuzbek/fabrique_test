@@ -20,6 +20,7 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from interviews.views import (
+    AnswerView,
     InterviewViewSet,
 )
 
@@ -27,7 +28,8 @@ router = DefaultRouter()
 router.register('interview', InterviewViewSet, 'interview')
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='answer-list-create')
+    path('admin/', admin.site.urls, name='answer-list-create'),
+    path('interview/<int:interview_id>/answer', AnswerView.as_view(), name='answer-create'),
 ]
 urlpatterns += router.urls
 

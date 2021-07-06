@@ -13,7 +13,7 @@ from interviews.models import (
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    search_fields = 'text', 'question__text', 'interview__title'
+    search_fields = 'answer', 'question__text',
 
 
 class QuestionInline(admin.TabularInline):
