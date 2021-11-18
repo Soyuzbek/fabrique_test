@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 from interviews.forms import (
     QuestionForm,
@@ -14,6 +13,10 @@ from interviews.models import (
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     search_fields = 'answer', 'question__text',
+
+    class Media:
+        js = ("js/django_better_admin_arrayfield.min.js", 'js/dynamic_type_field.js')
+        css = {"all": ("css/django_better_admin_arrayfield.min.css", 'css/dynamic_type_field.css')}
 
 
 class QuestionInline(admin.TabularInline):
