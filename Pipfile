@@ -10,6 +10,7 @@ python-dotenv = "*"
 psycopg2-binary = "*"
 django-better-admin-arrayfield = "*"
 drf-yasg = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

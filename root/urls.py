@@ -21,6 +21,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework.routers import DefaultRouter
 
+from accounts.views import TokenViewSet
 from interviews.views import (
     InterviewViewSet,
 )
@@ -36,6 +37,7 @@ schema_view = get_schema_view(
 
 router = DefaultRouter()
 router.register('api/interview', InterviewViewSet, 'interview')
+router.register('api/token', TokenViewSet, 'token')
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='answer-list-create'),
