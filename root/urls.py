@@ -17,20 +17,31 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework.routers import DefaultRouter
 
 from interviews.views import (
-    AnswerView,
     InterviewViewSet,
 )
 
+schema_view = get_schema_view(
+    openapi.Info(
+        title='Fabrique Test API',
+        default_version='v1',
+        contact=openapi.Contact(email='soyuzbek196.kg@gmail.com'),
+    ),
+    public=True,
+)
+
 router = DefaultRouter()
-router.register('interview', InterviewViewSet, 'interview')
+router.register('api/interview', InterviewViewSet, 'interview')
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='answer-list-create'),
-    path('interview/<int:interview_id>/answer', AnswerView.as_view(), name='answer-create'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0)),
 ]
+
 urlpatterns += router.urls
 
 if settings.DEBUG:

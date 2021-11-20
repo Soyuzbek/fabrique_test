@@ -1,10 +1,5 @@
 from rest_framework import serializers as srz
-
-from interviews.choices import (
-    Kind,
-)
 from interviews.models import (
-    Answer,
     Interview,
     Question,
 )
@@ -22,10 +17,3 @@ class InterviewSerializer(srz.ModelSerializer):
     class Meta:
         model = Interview
         fields = 'id', 'title', 'description', 'questions'
-
-
-class AnswerCreateSerializer(srz.ModelSerializer):
-
-    class Meta:
-        model = Answer
-        fields = 'answer', 'question',
